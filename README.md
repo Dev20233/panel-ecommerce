@@ -1,6 +1,16 @@
 # PANEL - Comic & Anime E-Commerce Platform
 
-![PANEL Website Screenshot](screenshot.png)
+![PANEL Home](screenshot.png)
+*The stunning manga-inspired homepage featuring bold comic UI elements.*
+
+![Shop Page](shop.png)
+*Browse our extensive collection of comics, anime, and premium merchandise with advanced filters.*
+
+![Shopping Cart](cart.png)
+*Manage your items in a sleek, high-contrast shopping cart built for a seamless user experience.*
+
+![Checkout & Receipts](checkout.png)
+*A smooth checkout flow that automatically generates zero-dependency manga-themed PDF receipts.*
 
 PANEL is a modern, premium online comic, anime, and superhero merchandise store prototype built using the MERN stack (MongoDB, Express, React, Node.js). This project serves as a comprehensive third-year college major project prototype, showcasing a fully integrated frontend and backend with a striking comic-book aesthetic.
 
