@@ -1,0 +1,251 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  overflow-x: hidden;
+}
+
+body {
+  font-family: 'Inter', system-ui, sans-serif;
+  color: #000000;
+  background-color: #ffffff;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  background-image: url('./assets/images.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background-color: rgba(255, 255, 255, 0.15);
+  transition: background-color 250ms ease-out;
+  pointer-events: none;
+}
+
+body.bg-faded::after {
+  background-color: rgba(255, 255, 255, 0.65);
+}
+
+body, a, button, select, input, .cursor-pointer {
+  cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24"><path fill="%23fde047" stroke="black" stroke-width="2" stroke-linejoin="round" d="M4 4l7 15 3-6 6-3-16-6z"/></svg>') 4 4, auto !important;
+}
+
+@layer components {
+  .manga-box {
+    @apply border-4 border-black bg-white shadow-manga transition-all duration-300;
+  }
+
+  .manga-box-hover {
+    @apply hover:translate-x-[4px] hover:translate-y-[4px] hover:shadow-manga-hover;
+  }
+
+  .btn-primary {
+    @apply manga-box manga-box-hover px-6 py-3 text-sm font-bold tracking-wider uppercase text-black
+      flex items-center justify-center;
+  }
+
+  .btn-outline {
+    @apply manga-box manga-box-hover px-6 py-3 text-sm font-bold tracking-wider uppercase text-black
+      flex items-center justify-center;
+  }
+
+  .input-field {
+    @apply w-full px-4 py-3 border-4 border-black bg-white text-black text-sm font-bold
+      focus:outline-none focus:shadow-manga transition-all duration-300;
+  }
+
+  .section-title {
+    @apply md:text-5xl font-manga tracking-widest uppercase text-center;
+    font-size: clamp(1.5rem, 4vw, 3rem);
+    text-shadow: 2px 2px 0px #000;
+    color: white;
+    -webkit-text-stroke: 2px black;
+  }
+
+  .section-subtitle {
+    @apply font-bold font-sans tracking-widest uppercase text-center mt-2 bg-black text-white px-2 py-1 inline-block transform -skew-x-12;
+    font-size: clamp(0.75rem, 2vw, 1.125rem);
+  }
+}
+
+::-webkit-scrollbar {
+  width: 12px;
+}
+
+::-webkit-scrollbar-track {
+  background: #ffffff;
+  border-left: 4px solid #000000;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #000000;
+  border: 2px solid #ffffff;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #333333;
+}
+
+/* Spider-Man hanging idle animation */
+@keyframes spiderHang {
+  0%, 100% {
+    transform: rotate(-2deg);
+  }
+  50% {
+    transform: rotate(2deg);
+  }
+}
+
+.spider-hang {
+  animation: spiderHang 4s ease-in-out infinite;
+  transform-origin: top center;
+}
+
+.spider-help-btn:hover .spider-hang,
+.spider-help-btn:focus .spider-hang {
+  animation: spiderHang 2s ease-in-out infinite;
+}
+
+/* Help panel slide-in */
+@keyframes helpSlideIn {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+.help-panel-slide {
+  animation: helpSlideIn 0.3s ease-out forwards;
+}
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .spider-hang {
+    animation: none;
+  }
+  .help-panel-slide {
+    animation: none;
+  }
+  .shield-spin, .shield-spin-reverse {
+    animation: none;
+  }
+}
+
+/* Shield Loading Animations */
+@keyframes shieldSpin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.shield-spin {
+  animation: shieldSpin 3.5s linear infinite;
+}
+
+@keyframes shieldSpinReverse {
+  from {
+    transform: rotate(360deg);
+  }
+  to {
+    transform: rotate(0deg);
+  }
+}
+
+.shield-spin-reverse {
+  animation: shieldSpinReverse 6s linear infinite;
+}
+
+/* Product Card Animations and Micro-interactions */
+.product-card {
+  transition: transform 200ms cubic-bezier(0.4, 0, 0.2, 1), box-shadow 200ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.product-card-image {
+  transition: transform 280ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.product-card-title {
+  transition: background-color 200ms ease-out;
+  padding: 0 4px;
+  margin: 0 -4px;
+  display: inline;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .product-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 10px 10px 0px 0px rgba(0, 0, 0, 1);
+  }
+
+  .product-card:hover .product-card-image {
+    transform: scale(1.04);
+  }
+
+  .product-card:hover .product-card-title {
+    background-color: #fde047; /* bg-yellow-300 */
+    color: #000000;
+  }
+}
+
+/* Keyboard accessibility */
+.product-card:focus-visible {
+  outline: none;
+  transform: translateY(-4px);
+  box-shadow: 10px 10px 0px 0px rgba(0, 0, 0, 1), 0 0 0 4px #fde047;
+}
+
+.product-card:focus-visible .product-card-image {
+  transform: scale(1.04);
+}
+
+.product-card:focus-visible .product-card-title {
+  background-color: #fde047;
+  color: #000000;
+}
+
+/* Route Page Entry Transition */
+.page-transition {
+  animation: pageEnter 220ms ease-out;
+}
+
+@keyframes pageEnter {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .page-transition {
+    animation: none;
+  }
+}
